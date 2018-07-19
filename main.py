@@ -1,5 +1,6 @@
 # Run with
-# FLASK_APP=main.py python -m flask run --host=0.0.0.0 --port=80
+# export FLASK_DEBUG=1
+# FLASK_APP=main.py python -m flask run --host=0.0.0.0
 
 import os
 import json
@@ -25,21 +26,17 @@ def index():
                 return render_template('error.html', error="Wrong payload")
             model = load_model(MODEL_PATH)
             df = pd.read_json(payload)
-            y_predicted, _ = test_model(model, df)
+            y_predicted = test_model(model, df)
             predicted_activity = one_hot_to_label(y_predicted)
             return render_template('response.html', activity=predicted_activity)
 
 def test_model(model, data):
     X_test, y_test = get_convoluted_data(data)
-    X_test, y_test = shuffle(X_test, y_test, random_state=0)
-
-    # Make predictions
+    X_test, _ = shuffle(X_test, y_test, random_state=0)
     y_predicted = model.predict(X_test)
     y_predicted = np.asarray([softmax_to_one_hot(y) for y in y_predicted])
-    for actual, predicted in zip(y_test, y_predicted):
-        print("Actual: ", one_hot_to_label(actual), "\t Predicted: ", one_hot_to_label(predicted))
 
-    return y_predicted, y_test
+    return y_predicted
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
