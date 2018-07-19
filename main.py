@@ -21,7 +21,10 @@ def index():
         # y_predicted = web_collect_classify_activity(model)
         # predicted_activity = one_hot_to_label(y_predicted)
         with backend.get_session().graph.as_default() as g:
-            payload = request.form['payload_json']
+            try:
+                payload = request.form['payload_json']
+            except:
+                return render_template('index.html', ip=IP_ADDRESS)
             model = load_model(MODEL_PATH)
             df = pd.read_json(payload)
             y_predicted, _ = test_model(model, df)
