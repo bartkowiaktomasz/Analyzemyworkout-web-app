@@ -1,6 +1,5 @@
 # Run with
-# FLASK_APP=web_app.py python -m flask run --host=0.0.0.0
-# Accessible at http://192.168.1.71:5000
+# FLASK_APP=main.py python -m flask run --host=0.0.0.0 --port=80
 
 import os
 import json
@@ -29,7 +28,7 @@ def index():
             predicted_activity = one_hot_to_label(y_predicted)
             return render_template('activity.html', activity=predicted_activity)
     else:
-        return render_template('index.html')
+        return render_template('index.html', ip=IP_ADDRESS)
 
 def test_model(model, data):
     X_test, y_test = get_convoluted_data(data)
@@ -44,4 +43,4 @@ def test_model(model, data):
     return y_predicted, y_test
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0')
