@@ -15,23 +15,19 @@ from config import *
 
 app = Flask(__name__)
 
-@app.route("/", methods = ['POST', 'GET'])
+@app.route("/", methods = ['POST'])
 def index():
     if request.method == 'POST':
-        # y_predicted = web_collect_classify_activity(model)
-        # predicted_activity = one_hot_to_label(y_predicted)
         with backend.get_session().graph.as_default() as g:
             try:
-                payload = request.form['payload_json']
+                payload = request.form[PAYLOAD_KEY]
             except:
-                return render_template('index.html', ip=IP_ADDRESS)
+                return render_template('error.html', error="Wrong payload")
             model = load_model(MODEL_PATH)
             df = pd.read_json(payload)
             y_predicted, _ = test_model(model, df)
             predicted_activity = one_hot_to_label(y_predicted)
-            return render_template('activity.html', activity=predicted_activity)
-    else:
-        return render_template('index.html', ip=IP_ADDRESS)
+            return render_template('response.html', activity=predicted_activity)
 
 def test_model(model, data):
     X_test, y_test = get_convoluted_data(data)
