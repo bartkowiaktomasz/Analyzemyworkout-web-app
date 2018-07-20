@@ -2,6 +2,9 @@
 # Python3 distutils
 sudo apt-get install python3-distutils
 
+# Add firewall rule
+Inbound connection at port 5000 (TCP)
+
 # Pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
