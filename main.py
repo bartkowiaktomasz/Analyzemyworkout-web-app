@@ -1,7 +1,7 @@
 """
 Run with
 export FLASK_DEBUG=1
-FLASK_APP=main.py python -m flask run --host=0.0.0.0
+FLASK_APP=main.py python3 -m flask run --host=0.0.0.0
 """
 
 import os
