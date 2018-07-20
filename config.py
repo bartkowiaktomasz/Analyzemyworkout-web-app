@@ -29,7 +29,7 @@ IP_ADDRESS = "http://35.234.141.115:5000/"
 PAYLOAD_KEY = "payload_json"
 
 # Model
-MODEL_PATH = 'model/model.h5'
+MODEL_PATH = 'models/model.h5'
 
 # Architecture
 N_CLASSES = len(LABELS_NAMES)
