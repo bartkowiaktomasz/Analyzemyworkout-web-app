@@ -33,7 +33,7 @@ MODEL_PATH = 'models/model.h5'
 
 # Architecture
 N_CLASSES = len(LABELS_NAMES)
-N_FEATURES = 3  # acc, gyro, magnetometer
+N_FEATURES = 9  # acc, gyro, magnetometer
 
 # Data preprocessing
 DATA_COLLECTION_TIME = 200
