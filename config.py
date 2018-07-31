@@ -37,5 +37,5 @@ N_FEATURES = 9  # acc, gyro, magnetometer
 
 # Data preprocessing
 DATA_COLLECTION_TIME = 200
-TIME_STEP = 20
-SEGMENT_TIME_SIZE = 40
+TIME_STEP = 5
+SEGMENT_TIME_SIZE = 20
