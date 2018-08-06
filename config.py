@@ -1,3 +1,8 @@
+"""
+Config file.
+All other scripts import variables from this config
+to their global namespace.
+"""
 ##################################################
 ### GLOBAL VARIABLES
 ##################################################
@@ -25,7 +30,8 @@ LABELS_NAMES = [
 ]
 
 # Web app
-IP_ADDRESS = "http://13.73.179.54:5000/"
+IP_ADDRESS = "http://104.40.158.95:5000/"
+IP_LOCAL = "http://192.168.1.71:5000"
 PAYLOAD_KEY = "payload_json"
 
 # Model
@@ -36,6 +42,5 @@ N_CLASSES = len(LABELS_NAMES)
 N_FEATURES = 9  # acc, gyro, magnetometer
 
 # Data preprocessing
-DATA_COLLECTION_TIME = 200
 TIME_STEP = 5
-SEGMENT_TIME_SIZE = 20
+SEGMENT_TIME_SIZE = 40

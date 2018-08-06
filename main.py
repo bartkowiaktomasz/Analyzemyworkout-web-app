@@ -1,4 +1,6 @@
 """
+Classificator web server. It receives a JSON payload, runs
+a classification on it and returns predicted activity.
 Run with
 export FLASK_DEBUG=1
 FLASK_APP=main.py python3 -m flask run --host=0.0.0.0
@@ -25,7 +27,7 @@ def index():
             try:
                 payload = request.form[PAYLOAD_KEY]
             except:
-                return render_template('error.html', error="Wrong payload")
+                return render_template('error.html', error="Wrong payload"), HTTP_400_BAD_REQUEST
             model = load_model(MODEL_PATH)
             df = pd.read_json(payload)
             y_predicted = test_model(model, df)
