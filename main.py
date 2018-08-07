@@ -26,12 +26,12 @@ def index():
         with backend.get_session().graph.as_default() as g:
             try:
                 payload = request.form[PAYLOAD_KEY]
+                model = load_model(MODEL_PATH)
+                df = pd.read_json(payload)
+                y_predicted = test_model(model, df)
+                predicted_activity = one_hot_to_label(y_predicted)
             except:
-                return render_template('error.html', error="Wrong payload"), HTTP_400_BAD_REQUEST
-            model = load_model(MODEL_PATH)
-            df = pd.read_json(payload)
-            y_predicted = test_model(model, df)
-            predicted_activity = one_hot_to_label(y_predicted)
+                return render_template('error.html', error="Wrong payload"), 400
             return render_template('response.html', activity=predicted_activity)
 
 def test_model(model, data):
@@ -42,5 +42,5 @@ def test_model(model, data):
 
     return y_predicted
 
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
     app.run(host='0.0.0.0')
